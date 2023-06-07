@@ -5,9 +5,9 @@ import com.tailon.projetospringboot.service.AnimeService;
 import com.tailon.projetospringboot.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,13 +17,13 @@ import java.util.List;
  * Responsável por receber todas as requisições do usuário.
  * Seus métodos (actions) são responsáveis por uma página, controlando qual model usar e qual view
  * será mostrado ao usuário.
-
+ * <p>
  * Adicionando o spring devtools no pom automaticamente adicionamos o Hot Swap,
  * assim quando fizermos alterações pequenas em uma classe, o build é mais rápido.
  */
 
 @RestController
-@RequestMapping("anime")
+@RequestMapping("animes")
 @Log4j2
 @RequiredArgsConstructor
 public class AnimeController {
@@ -31,10 +31,21 @@ public class AnimeController {
     private final DateUtil dateUtil;
     private final AnimeService animeService;
 
-    @GetMapping(path = "list")
-    public List<Anime> ListAnime() {
+    @GetMapping
+    public ResponseEntity<List<Anime>> ListAnime() {
         log.info(dateUtil.formatLocalDateTimeToToDataBaseStile(LocalDateTime.now()));
-        return animeService.listAll();
+        return ResponseEntity.ok(animeService.listAll());
     }
 
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Anime> getAnimeById(@PathVariable Long id) {
+        log.info(dateUtil.formatLocalDateTimeToToDataBaseStile(LocalDateTime.now()));
+        return ResponseEntity.ok(animeService.getById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Anime> save(@RequestBody Anime anime) {
+        log.info(dateUtil.formatLocalDateTimeToToDataBaseStile(LocalDateTime.now()));
+        return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
+    }
 }

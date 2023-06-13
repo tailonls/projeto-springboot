@@ -2,6 +2,28 @@
 
 Projeto Springboot criado para estudos pessoais.
 
+### Ferramentas utilizadas:
+- Docker para windows
+- IntelliJ
+- Mysql
+___
+
+### SQL:
+- **DML** (Data Manipulation Language): para representar o conjunto de instruções da linguagem SQL para manipular os dados (**INSERT, UPDATE e DELETE**).
+- **DDL** (Data Definition Language): conjunto de instruções e comandos para definição de dados (**CREATE, ALTER e DROP**).
+- **DCL** (Data Control Language): instruções para controlar as permissões de acesso e uso aos objetos do banco de dados (**GRANT e REVOKE**).
+- **DQL** (Data Query Language): comando que realiza consultas no SGBD (**SELECT**).
+- **DTL/TCL** (Data Transaction Language/Transaction Control Language): envolve gerenciamento e controle de transações (**BEGIN/SET TRANSACTION, COMMIT, ROLLBACK, SAVEPOINT**)
+
+___
+### Comandos docker utilizados:
+
+    docker-compose up (subir container)
+    docker-compose up (remove container, mas o volume continua)
+    docker ps (listar apenas containers de pé)
+    docker ps -a (listar todos os containers)
+    ctrl C (parar o conteiner)
+    
 
 ## Métodos HTTP:
 

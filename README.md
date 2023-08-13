@@ -19,7 +19,7 @@ ___
 ### Comandos docker utilizados:
 
     docker-compose up (subir container)
-    docker-compose up (remove container, mas o volume continua)
+    docker-compose down (remove container, mas o volume continua)
     docker ps (listar apenas containers de pé)
     docker ps -a (listar todos os containers)
     ctrl C (parar o conteiner)

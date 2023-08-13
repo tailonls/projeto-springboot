@@ -1,6 +1,8 @@
 package com.tailon.projetospringboot.controller;
 
 import com.tailon.projetospringboot.domain.Anime;
+import com.tailon.projetospringboot.requests.AnimePostRequestBody;
+import com.tailon.projetospringboot.requests.AnimePutRequestBody;
 import com.tailon.projetospringboot.service.AnimeService;
 import com.tailon.projetospringboot.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -40,13 +42,13 @@ public class AnimeController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<Anime> getAnimeById(@PathVariable Long id) {
         log.info(dateUtil.formatLocalDateTimeToToDataBaseStile(LocalDateTime.now()));
-        return ResponseEntity.ok(animeService.getById(id));
+        return ResponseEntity.ok(animeService.findByIdOrThrowBadRequestException(id));
     }
 
     @PostMapping
-    public ResponseEntity<Anime> save(@RequestBody Anime anime) {
+    public ResponseEntity<Anime> save(@RequestBody AnimePostRequestBody animePostRequestBody) {
         log.info(dateUtil.formatLocalDateTimeToToDataBaseStile(LocalDateTime.now()));
-        return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
+        return new ResponseEntity<>(animeService.save(animePostRequestBody), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -57,9 +59,9 @@ public class AnimeController {
     }
 
     @PutMapping()
-    public ResponseEntity<Void> replace(@RequestBody Anime anime) {
+    public ResponseEntity<Void> replace(@RequestBody AnimePutRequestBody animePutRequestBody) {
         log.info(dateUtil.formatLocalDateTimeToToDataBaseStile(LocalDateTime.now()));
-        animeService.replace(anime);
+        animeService.replace(animePutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
